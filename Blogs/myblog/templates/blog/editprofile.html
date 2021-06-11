@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+
+{% block editprofile %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 "> 
+            <h4 class="alert alert-warning">Update Information</h4>
+            <form action="" method="POST" novalidate>
+            {% csrf_token %}
+                {{form.as_p}}
+                <center>
+                    <input type="submit" class ="btn btn-success btn-sm btn-center mx-2" value="Update">
+                    <a href="{% url 'profile' user.id %}" class="btn btn-danger btn-sm mx-2">Cancel</a>
+                    <a href="{% url 'changepassword' %}" class="btn btn-dark btn-sm mx-2">Change Password</a>
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock editprofile %}

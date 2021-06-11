@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} Update Post {% endblock title %}
+
+{% block update %}
+    {% if data %}
+        <div class="container">
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success mx-3" value="Update">
+                <a href="{% url 'show' data.id %}" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock update %}

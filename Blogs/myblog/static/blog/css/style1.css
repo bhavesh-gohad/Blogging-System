@@ -1,0 +1,14 @@
+.vertical {
+    border-left: 2px solid black;
+    height: auto px;
+    /* width : auto px; */
+    /* position:absolute; */
+    left: 100%;
+}
+
+.horizontal {
+    border-top: 2px solid black;
+    height: auto px;
+    /* position:absolute; */
+    right: 100%;
+}

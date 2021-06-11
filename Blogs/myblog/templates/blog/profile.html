@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block profile %}
+    
+        <div class="container-fluid mb-5">
+            <div class="row">
+                {% if data %}
+<!--                <div class="col-sm-3 text-center">-->
+<!--                    <img src="{{ data.profile.profile_pic.url }}" class="rounded-circle" width=100 height=100 alt="Pic"> <br><br>-->
+<!--                    <b class="text-center">{{data.first_name}} {{data.last_name}}<br></b> -->
+<!--                        <hr class="horizontal">-->
+<!--                        <p>{{data.profile.bio}}</p>                  -->
+<!--                </div>-->
+                <div class = "vertical"></div>
+                    <div class="col-sm-7 mx-5">
+                        <form action="" method="POST" novalidate>
+                            {% csrf_token %}
+                            <b>Username : </b>
+                            <h1 class=" mb-4 form-control bg-dark text-white"><b>{{data.username}}</b></h1>
+                            <b>First Name : </b>
+                            <h3 class=" mb-4 form-control bg-dark text-white"><b>{{data.first_name}}</b></h3>
+                            <b>Last Name : </b>
+                            <h1 class=" mb-4 form-control bg-dark text-white"><b>{{data.last_name}}</b></h1>
+                            <b>Email Address: </b>
+                            <h1 class=" form-control bg-dark text-white"><b>{{data.email}}</b></h1>
+
+                            <a href="{% url 'editprofile' data.id %}" class="btn btn-warning btn-sm mx-2 mt-5">Edit</a>
+                            <a href="{% url 'home' %}" class="btn btn-dark btn-sm mx-2 mt-5">Back</a>
+                        </form>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+            
+
+                {% if request.user.is_superuser %}
+                <hr class="horizontal">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                                <h4 class="text-center alert alert-info">Users</h4>
+                                {% if all_users %}
+                                    <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for d in all_users %}
+                                        <tr>
+                                            <td>{{d.id}}</td>
+                                            <td>{{d.first_name}}</td>
+                                            <td>{{d.email}}</td>
+                                            <td>
+                                            
+                                                <form action="{% url 'delete_user' d.id %}" class="d-inline" method="POST">
+                                                {% csrf_token %}
+                                                <a href="{% url 'editprofile' d.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %} 
+                                    </tbody>
+                                    </table>
+                                    {% else %}
+                                    <h4 class="text-center alert alert-warning">No Records</h4>
+                                    {% endif %}
+                            
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        
+{% endblock profile %}

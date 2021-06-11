@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} Sign Up {% endblock title %}
+
+{% block signup %}
+<div class="container col-sm-10">
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-info mx-3" value="Signup">
+    </form>
+</div>
+    
+{% endblock signup %}
